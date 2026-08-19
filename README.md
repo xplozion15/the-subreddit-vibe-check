@@ -1,16 +1,33 @@
-# React + Vite
+The Subreddit Vibe Check
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React app that checks the sentiment of the top 50 hot posts from a subreddit.
 
-Currently, two official plugins are available:
+Features
+Search for a subreddit
+Analyze post titles
+Show positive, neutral, and negative results
+Show the overall vibe
+Show the median sentiment score
+Tech Stack
+React + Vite
+React Router
+CSS Modules
+Sentiment.js
+Reddit API
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+I initially used Reddit's /r/{subreddit}/hot endpoint to fetch the 50 hot posts.
 
-## React Compiler
+While working on the project, Reddit started blocking the API requests because of its network/security restrictions. I also looked into Reddit OAuth, but creating an API application required some extra steps and approval.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Since I still wanted to finish and test the dashboard properly, I used mock data for the final version.
 
-## Expanding the ESLint configuration
+So the Reddit service can be connected later without changing the sentiment analysis or dashboard logic.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Assumptions
+Only post titles are analyzed.
+The dashboard works with 50 posts.
+Sentiment is calculated using the sentiment npm package.
+The median is calculated from the sentiment scores.
+How to run
+npm install
+npm run dev
