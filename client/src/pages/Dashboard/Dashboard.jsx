@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { getHotPosts } from "../../services/reddit.services";
+import { mockPosts } from "../../data/mockPosts";
 import { analyzeTitles } from "../../services/sentiment.services";
 import {
   getSentimentStats,
@@ -8,7 +10,6 @@ import {
 import { SentimentCard } from "../../components/SentimentCard/SentimentCard";
 import { OverallVibe } from "../../components/OverallVibe/OverallVibe";
 import { MedianScore } from "../../components/MedianScore/MedianScore";
-import { getHotPosts } from "../../services/reddit.services";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
@@ -20,7 +21,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAndAnalyzePosts = async () => {
       try {
-        const posts = await getHotPosts(subreddit);
+        // const posts = await getHotPosts(subreddit);
+        const posts = mockPosts;
 
         const results = analyzeTitles(posts);
         const sentimentStats = getSentimentStats(results);
