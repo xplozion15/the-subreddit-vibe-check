@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getHotPosts } from "../services/reddit.services";
+// import { getHotPosts } from "../services/reddit.services";
+import { mockPosts } from "../data/mockPosts";
 import { analyzeTitles } from "../services/sentiment.services";
 import {
   getSentimentStats,
@@ -16,7 +17,8 @@ function Dashboard() {
   useEffect(() => {
     const fetchAndAnalyzePosts = async () => {
       try {
-        const posts = await getHotPosts(subreddit);
+        // const posts = await getHotPosts(subreddit);
+        const posts = mockPosts;
         const results = analyzeTitles(posts);
 
         const sentimentStats = getSentimentStats(results);
@@ -50,14 +52,24 @@ function Dashboard() {
   return (
     <main>
       <h1>r/{subreddit}</h1>
+      <p>{stats.total} hot posts</p>
 
-      <p>{stats.total} posts analyzed</p>
+      <section>
+        <h2>Overall vibe</h2>
+        <p>{stats.overallSentiment}</p>
+      </section>
 
-      <p>Overall vibe: {stats.overallSentiment}</p>
+      <section>
+        <p>Positive: {stats.positive}</p>
+        <p>Neutral: {stats.neutral}</p>
+        <p>Negative: {stats.negative}</p>
+      </section>
 
-      <p>Positive: {stats.positive}</p>
-      <p>Neutral: {stats.neutral}</p>
-      <p>Negative: {stats.negative}</p>
+      <section>
+        <p>Positive: {stats.positivePercentage.toFixed(1)}%</p>
+        <p>Neutral: {stats.neutralPercentage.toFixed(1)}%</p>
+        <p>Negative: {stats.negativePercentage.toFixed(1)}%</p>
+      </section>
 
       <p>Median sentiment score: {stats.medianScore}</p>
     </main>
