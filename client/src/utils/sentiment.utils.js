@@ -25,7 +25,7 @@ const getSentimentStats = (results) => {
     }
   });
 
-  const scores = results.map((result) => result.score);
+  const scores = results.map((result) => result.comparative);
 
   const total = results.length;
 

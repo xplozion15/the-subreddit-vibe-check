@@ -1,0 +1,25 @@
+.card {
+  padding: 16px;
+  border-right: 1px solid #333;
+}
+
+.card:last-child {
+  border-right: none;
+}
+
+.label {
+  color: #888;
+  font-size: 14px;
+}
+
+.count {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.percentage {
+  margin-top: 4px;
+  color: #888;
+  font-size: 14px;
+}

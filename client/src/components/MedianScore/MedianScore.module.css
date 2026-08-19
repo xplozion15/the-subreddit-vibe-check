@@ -1,0 +1,15 @@
+.label {
+  color: #888;
+  font-size: 14px;
+}
+
+.score {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.scale {
+  color: #666;
+  font-size: 12px;
+}
