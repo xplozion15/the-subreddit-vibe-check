@@ -7,6 +7,9 @@ import {
   getSentimentStats,
   getOverallSentiment,
 } from "../utils/sentiment.utils";
+import { SentimentCard } from "../components/SentimentCard";
+import { OverallVibe } from "../components/OverallVibe";
+import { MedianScore } from "../components/MedianScore";
 
 function Dashboard() {
   const { subreddit } = useParams();
@@ -19,6 +22,7 @@ function Dashboard() {
       try {
         // const posts = await getHotPosts(subreddit);
         const posts = mockPosts;
+
         const results = analyzeTitles(posts);
 
         const sentimentStats = getSentimentStats(results);
@@ -54,24 +58,29 @@ function Dashboard() {
       <h1>r/{subreddit}</h1>
       <p>{stats.total} hot posts</p>
 
-      <section>
-        <h2>Overall vibe</h2>
-        <p>{stats.overallSentiment}</p>
-      </section>
+      <OverallVibe sentiment={stats.overallSentiment} />
 
       <section>
-        <p>Positive: {stats.positive}</p>
-        <p>Neutral: {stats.neutral}</p>
-        <p>Negative: {stats.negative}</p>
+        <SentimentCard
+          label="Positive"
+          count={stats.positive}
+          percentage={stats.positivePercentage}
+        />
+
+        <SentimentCard
+          label="Neutral"
+          count={stats.neutral}
+          percentage={stats.neutralPercentage}
+        />
+
+        <SentimentCard
+          label="Negative"
+          count={stats.negative}
+          percentage={stats.negativePercentage}
+        />
       </section>
 
-      <section>
-        <p>Positive: {stats.positivePercentage.toFixed(1)}%</p>
-        <p>Neutral: {stats.neutralPercentage.toFixed(1)}%</p>
-        <p>Negative: {stats.negativePercentage.toFixed(1)}%</p>
-      </section>
-
-      <p>Median sentiment score: {stats.medianScore}</p>
+      <MedianScore score={stats.medianScore} />
     </main>
   );
 }
